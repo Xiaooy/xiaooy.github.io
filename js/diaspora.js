@@ -103,6 +103,8 @@ var Diaspora = {
                 if (comment.data('ae') == true){
                     comment.click();
                 }
+                liverecomment = $("#lv-container");
+                liverecomment.click();
             }, 0)
         })
     },
@@ -193,6 +195,16 @@ var Diaspora = {
         }
         id.style.left = (_width - parseInt(id.style.width)) / 2 +'px';
         id.style.top = (_height - parseInt(id.style.height)) / 2 +'px';
+    },
+    livere: function(){
+        var j, e = document.getElementsByTagName('script')[0];
+        if (typeof LivereTower === 'function') { return; }
+    
+        j = document.createElement('script');
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+    
+        e.parentNode.insertBefore(j, e);
     }
 };
 
@@ -464,6 +476,7 @@ $(function() {
                 break;
               // comment
             case - 1 != tag.indexOf("comment"): 
+            alert("1");
                 Diaspora.loading(),
                 comment = $('#gitalk-container');
                 gitalk = new Gitalk({
@@ -480,6 +493,17 @@ $(function() {
                 Diaspora.loaded();
                 return false;
                 break;
+            case - 1 != tag.indexOf("livere"): 
+            var j, e = document.getElementsByTagName('script')[0];
+            if (typeof LivereTower === 'function') { return; }
+        
+            j = document.createElement('script');
+            j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+            j.async = true;
+        
+            e.parentNode.insertBefore(j, e);
+                return false;
+                break;
             default:
                 return true;
                 break;
@@ -490,6 +514,11 @@ $(function() {
     if (comment.data('ae') == true){
         comment.click();
     }
+    liverecomment = $("#lv-container");
+    liverecomment.click();
+    
     console.log("%c Github %c","background:#24272A; color:#ffffff","","https://github.com/Fechin/hexo-theme-diaspora")
 })
+
+
 
